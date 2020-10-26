@@ -37,7 +37,7 @@ class StudentCourseListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         qs = super(StudentCourseListView, self).get_queryset()
-        return qs.filter(student__in=[self.request.user])
+        return qs.filter(students__in=[self.request.user])
 
 class StudentCourseDetailView(DetailView):
     model = Course
@@ -54,4 +54,4 @@ class StudentCourseDetailView(DetailView):
             context['module']= course.modules.get(id=self.kwargs['module_id'])
         else:
             context['module'] = course.modules.all()[0]
-        return context 
+        return context
